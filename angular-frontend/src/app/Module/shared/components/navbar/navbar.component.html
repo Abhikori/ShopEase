@@ -23,7 +23,7 @@
                 <mat-icon style="color: black;">shopping_cart</mat-icon>
             </button>
             
-            <button *ngIf="true" style="color: white;" mat-raised-button class="">Login</button>
+            <button (click)="handleOpenLoginModal()" *ngIf="true" style="color: white;" mat-raised-button class="">Login</button>
 
             <div *ngIf="true" class="relative ml-3 flex items-center">
                 <div class="flex items-center space-x-5">
