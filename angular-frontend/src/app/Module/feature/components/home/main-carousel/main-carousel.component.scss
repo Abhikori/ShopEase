@@ -1,0 +1,20 @@
+.carousel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .carousel {
+    display: flex; // Ensure the items are in a row
+    width: 100%;
+  }
+  
+  .carousel-item {
+    flex: 0 0 100%; // Each item takes up 100% of the carousel width
+  }
+  
+  img {
+    width: 100%; // Image fills the carousel item
+    height: auto;
+    display: block;
+  }
