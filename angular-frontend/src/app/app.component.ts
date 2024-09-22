@@ -20,10 +20,11 @@ export class AppComponent {
   
   ngOnInit(){
     if(localStorage.getItem('jwt')){
-      this.userService.getUserProfile()
-      this.store.pipe(select((store)=>store.user)).subscribe((user)=>{
-        this.userService.getUserProfile()
-      })
+      // this.userService.getUserProfile()
+      // this.store.pipe(select((store)=>store.user)).subscribe((user)=>{
+          // if(!user || !user.id)
+        // this.userService.getUserProfile()
+      // })
     }
   }
 }
