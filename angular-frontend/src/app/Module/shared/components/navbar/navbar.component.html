@@ -23,17 +23,17 @@
                 <mat-icon style="color: black;">shopping_cart</mat-icon>
             </button>
             
-            <button (click)="handleOpenLoginModal()" *ngIf="true" style="color: white;" mat-raised-button class="">Login</button>
+            <button (click)="handleOpenLoginModal()" *ngIf="!userProfile" style="color: white;" mat-raised-button class="">Login</button>
 
-            <div *ngIf="true" class="relative ml-3 flex items-center">
+            <div *ngIf="userProfile" class="relative ml-3 flex items-center">
                 <div class="flex items-center space-x-5">
-                    <span class="font-bold text-lg">Abhishek</span>
+                    <span class="font-bold text-lg">{{userProfile.firstName}}</span>
                     <button mat-button [matMenuTriggerFor]="profileMenu">
                         <img class="h-5 w-5" src="https://cdn.pixabay.com/photo/2013/07/12/12/02/people-145129_640.png" alt="">
                         <mat-menu #profileMenu="matMenu">
                             <button (click)="navigateTo('account/orders')" mat-menu-item>Orders</button>
                             <button mat-menu-item>Profile</button>
-                            <button mat-menu-item>Logout</button>
+                            <button mat-menu-item (click)="handleLogout()">Logout</button>
                           </mat-menu>
                     </button>
                 </div>
