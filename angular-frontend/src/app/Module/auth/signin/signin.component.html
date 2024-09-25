@@ -1,0 +1,35 @@
+<div class="container">
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+        <h1>ShopEase</h1>
+
+        <div>
+            <mat-form-field class="w-full">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" required email>
+
+                <mat-error *ngIf="loginForm.controls['email'].hasError('required')">Email is required</mat-error>
+                <mat-error *ngIf="loginForm.controls['email'].hasError('email')">Please enter a valid email address</mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-full">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" required password>
+
+                <mat-error *ngIf="loginForm.controls['password'].hasError('required')">Password is required</mat-error>
+                <mat-error *ngIf="loginForm.controls['password'].hasError('minlength')">Password should be atleast 8 characters long</mat-error>
+            </mat-form-field>
+            <div>
+                <button style="padding: 1.7rem;" class="w-full" mat-raised-button color="w-full" color="accent">
+                    Login
+                </button>
+            </div>
+
+            <div class="text-center pt-5">
+                <span>If you don't have Account?</span>
+                <button mat-raised-button color="accent" (click)="changeTemplate()">
+                    Register
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
