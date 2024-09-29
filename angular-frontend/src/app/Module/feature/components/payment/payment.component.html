@@ -2,14 +2,14 @@
 
     <ng-container>
         <div class="p-5 shadow-lg rounded-md box my-5">
-            <app-address-card showButton="false"/>
+            <app-address-card [address]="order.shippingAddress" showButton="false"/>
         </div>
 
         <div class="grid grid-cols-1 gap-5 lg:grid-cols-3 relative justify-between py-5">
             <div class="col-span-2">
                 <div class="space-y-3 box rounded-md">
-                    <div *ngFor="let product of products; let last=last">
-                        <app-cart-item/>
+                    <div *ngFor="let item of order.orderItems; let last=last">
+                        <app-cart-item [cartItem]="item"/>
                         <mat-divider *ngIf="!last"/>
                     </div>
                 </div>
