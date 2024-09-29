@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { AddressCardComponent } from "../../../shared/components/address-card/address-card.component";
 import { CartItemComponent } from "../../../shared/components/cart-item/cart-item.component";
+import { ActivatedRoute } from '@angular/router';
+import { OrderService } from '../../../../State/Order/order.service';
+import { select, Store } from '@ngrx/store';
+import { AppState } from '../../../../Models/AppState';
 
 @Component({
   selector: 'app-payment',
@@ -13,4 +17,19 @@ import { CartItemComponent } from "../../../shared/components/cart-item/cart-ite
 })
 export class PaymentComponent {
   products=[1,1,1,1,1]
+  order:any
+
+  constructor(private activatedRoute:ActivatedRoute, private orderService:OrderService, private store:Store<AppState>){}
+
+  ngOnInit(){
+    let id=this.activatedRoute.snapshot.paramMap.get("id")
+
+    if(id)
+      this.orderService.getOrderById(id)
+
+    this.store.pipe(select(store=>store.order)).subscribe((order)=>{
+      this.order=order.order
+    })
+
+  }
 }
