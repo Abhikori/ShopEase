@@ -1,17 +1,17 @@
 <div class="p-5 shadow-lg">
     <div class="flex items-center">
         <div class="w-[5rem] h-[rem] lg:w-[9rem] lg:h-[9rem]">
-            <img class="w-full h-full object-cover object-top" src="https://rukminim1.flixcart.com/image/612/612/xif0q/shirt/f/z/l/m-white-formal-youthfirst-original-imagqjdfgwjfwgsb.jpeg?q=70" alt="">
+            <img class="w-full h-full object-cover object-top" [src]="cartItem.product.imageUrl" alt="">
         </div>
 
         <div class="ml-5 space-y-1">
-            <p class="font-semibold">Men</p>
-            <p class="text-gray-500">Size : M, Black</p>
-            <p class="text-gray-500 mt-2">Seller : Trendz</p>
+            <p class="font-semibold">{{cartItem.product.title}}</p>
+            <p class="text-gray-500">Size : {{cartItem.size}}, Black</p>
+            <p class="text-gray-500 mt-2">Seller : {{cartItem.brand}}</p>
             <div class="flex space-x-2 items-center pt-3">
-                <p class="text-gray-500 line-through">3499</p>
-                <p class="font-semibold text-lg">1499</p>
-                <p class="text-green-600 font-semibold">70% off</p>
+                <p class="text-gray-500 line-through">{{cartItem.product.price}}</p>
+                <p class="font-semibold text-lg">{{cartItem.product.discountedPrice}}</p>
+                <p class="text-green-600 font-semibold">{{cartItem.product.discountedPercent}}% off</p>
             </div>
         </div>
 
@@ -24,9 +24,9 @@
                     <mat-icon>remove</mat-icon>
                 </button>
             </div>
-            <span class="py-1 px-7 border-gray-800 rounded-sm">1</span>
+            <span class="py-1 px-7 border-gray-800 rounded-sm">{{cartItem.quantity}}</span>
             <div class="example-button-container">
-                <button mat-mini-fab style="border-radius: 50%;" color="accent" (click)="updateCartItem(1)" [disabled]="false">
+                <button mat-mini-fab style="border-radius: 50%;" color="accent" (click)="updateCartItem(1)" [disabled]="cartItem.quantity===1">
                     <mat-icon>add</mat-icon>
                 </button>
             </div>
