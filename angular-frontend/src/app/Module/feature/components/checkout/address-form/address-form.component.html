@@ -1,0 +1,79 @@
+<div class="grid grid-cols-1 gap-4 lg:grid-cols-12 px-5 lg:px-20">
+
+    <div class="col-span-1 lg:col-span-5">
+        <div class="rounded-md shadow-md h-[32.2rem] overflow-y-scroll hide-scrollbar box py-5">
+            <div class="p-5 py-7 cursor-pointer">
+
+                <div *ngFor="let item of addresses; let last=last" class="py-2 space-y-2">
+                    <app-address-card [address]="item"/>
+                    <button mat-flat-button style="padding: 1.6rem;" color="accent" (click)="handleCreateOrder(item)">
+                        Deliver Here
+                    </button>
+                    <mat-divider *ngIf="!last"></mat-divider>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-span-1 lg:col-span-7">
+        <div class="rounded-md shadow-md p-5 box">
+
+            <form [formGroup]="myForm" (ngSubmit)="handleSubmit()">
+                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+
+                    <div class="col-span-1">
+                        <mat-form-field class="w-full" appearance="fill">
+                            <mat-label>First Name</mat-label>
+                            <input matInput formControlName="firstName" placeholder="First Name" autocomplete="given-name" type="text"/>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-1">
+                        <mat-form-field class="w-full" appearance="fill">
+                            <mat-label>Last Name</mat-label>
+                            <input matInput formControlName="lastName" placeholder="Last Name" autocomplete="given-name" type="text"/>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-2">
+                        <mat-form-field class="w-full" appearance="fill">
+                            <mat-label>Address</mat-label>
+                            <textarea matInput formControlName="lastName" placeholder="Last Name" autocomplete="given-name" type="text" rows="4"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-1">
+                        <mat-form-field class="w-full" appearance="fill">
+                            <mat-label>City</mat-label>
+                            <input matInput formControlName="city" placeholder="City" autocomplete="given-name" type="text"/>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-1">
+                        <mat-form-field class="w-full" appearance="fill">
+                            <mat-label>State</mat-label>
+                            <input matInput formControlName="state" placeholder="State" autocomplete="given-name" type="text"/>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-1">
+                        <mat-form-field class="w-full" appearance="fill">
+                            <mat-label>Zip Code</mat-label>
+                            <input matInput formControlName="zipCode" placeholder="Zip Code" autocomplete="given-name" type="text"/>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-1">
+                        <mat-form-field class="w-full" appearance="fill">
+                            <mat-label>Phone Number</mat-label>
+                            <input matInput formControlName="mobile" placeholder="Phone Number" autocomplete="given-name" type="text"/>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-2">
+                        <button mat-flat-button class="w-full" style="padding: 1.6rem;" color="accent" type="submit">
+                            Deliver Here
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>
