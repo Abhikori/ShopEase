@@ -10,22 +10,18 @@ import { CommonModule } from '@angular/common';
   templateUrl: './main-carousel.component.html',
   styleUrls: ['./main-carousel.component.scss'] 
 })
-export class MainCarouselComponent implements OnInit, OnDestroy {
-  carouselData : any; // Initialized here directly
+export class MainCarouselComponent {
+  carouselData : any; 
   currentSlide = 0;
   interval: any;
 
   ngOnInit() {
     this.carouselData=homeCarouselData
-    // this.autoPlay()
+    this.autoPlay()
   }
 
   autoPlay() {
-    // Clear any existing interval to prevent multiple intervals from running
-    // if (this.interval) {
-    //   clearInterval(this.interval);
-    // }
-
+    
     setInterval(() => {
       this.nextSlide();
     }, 2000); // Change slide every 2 seconds
@@ -33,12 +29,8 @@ export class MainCarouselComponent implements OnInit, OnDestroy {
 
   nextSlide() {
     this.currentSlide = (this.currentSlide + 1) % this.carouselData.length;
-    // console.log(this.currentSlide)
+    
   }
 
-  ngOnDestroy() {
-    // if (this.interval) {
-    //   clearInterval(this.interval); // Clean up interval on component destruction
-    // }
-  }
+  
 }
