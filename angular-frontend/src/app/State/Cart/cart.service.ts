@@ -48,7 +48,7 @@ export class CartService{
     }
 
     removeCartItem(cartItemId:any){
-        const url=`${this.API_BASE_URL}/api/cart_items/${cartItemId}`
+        const url=`${this.API_BASE_URL}/api/cart/cart_items/${cartItemId}`
         const headers=new HttpHeaders({
             'Content-Type':'application/json',
             'Authorization':`Bearer ${localStorage.getItem("jwt")}`
@@ -62,7 +62,7 @@ export class CartService{
     }
 
     updateCartItem(reqData:any){
-        const url=`${this.API_BASE_URL}/api/cart_items/${reqData.cartItemId}`
+        const url=`${this.API_BASE_URL}/api/cart/cart_items/${reqData.cartItemId}`
         const headers=new HttpHeaders({
             'Content-Type':'application/json',
             'Authorization':`Bearer ${localStorage.getItem("jwt")}`
