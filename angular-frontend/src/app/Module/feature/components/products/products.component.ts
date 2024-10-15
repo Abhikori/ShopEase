@@ -13,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../../../State/Product/product.service';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../../../Models/AppState';
+import { mens_kurta } from '../../../../../Data/Men/men_kurta';
 
 @Component({
   selector: 'app-products',
@@ -49,7 +50,7 @@ export class ProductsComponent {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.levelThree=params.get('levelThree')
       var reqData = {
-        category: params.get('levelThree'),
+        category: params.get('levelThree')||'',
         colors: [],
         sizes: [],
         minPrice: 0,
@@ -59,7 +60,8 @@ export class ProductsComponent {
         pageSize: 10,
         stock: null,
       };
-      this.productService.findProductsByCategory(reqData);
+      // this.productService.findProductsByCategory(reqData);
+      this.matchingLevelThree(reqData.category);
     });
 
     this.activatedRoute.queryParams.subscribe(params => {
@@ -86,14 +88,55 @@ export class ProductsComponent {
         stock: null,
       };
       console.log(reqData)
-      this.productService.findProductsByCategory(reqData);
+      // this.productService.findProductsByCategory(reqData);
+      this.matchingLevelThree(reqData.category);
+
 
     });
 
-    this.store.pipe(select((store)=>store.product)).subscribe((product)=>{
-      this.products=product.products.content;
-    })
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.applyFilters(params);  // Apply filters when query params change
+    });
+
+    // this.store.pipe(select((store)=>store.product)).subscribe((product)=>{
+    //   this.products=product.products.content;
+    // })
   }
+
+  matchingLevelThree(levelThree: string) {
+    if (levelThree === 'mens_kurta') {
+      this.products = mens_kurta;  // Assign the array of products
+    } else if (levelThree === 'mens_pants') {
+      this.products = mensPantsPage1;  // Assign the array of pants products
+    }
+  }
+
+  applyFilters(params: any) {
+    const color = params["color"] ? params["color"].split(',') : [];
+    const size = params["size"];
+    const price = params["price"];
+    const discount = params["discount"]; // Fixed typo
+    const stock = params["stock"];
+    const minPrice = price ? +price.split("-")[0] : 0;
+    const maxPrice = price ? +price.split("-")[1] : 10000;
+
+    this.products = this.products.filter((product: any) => {
+      // Color filter
+      const colorMatch = color.length === 0 || color.includes(product.color);
+      // Size filter
+      const sizeMatch = !size || product.size === size;
+      // Price filter
+      const priceMatch = product.price >= minPrice && product.price <= maxPrice;
+      // Discount filter
+      const discountMatch = !discount || product.discount >= +discount;
+      // Stock filter
+      const stockMatch = !stock || product.stock === stock;
+
+      // Return true if all filters match
+      return colorMatch && sizeMatch && priceMatch && discountMatch && stockMatch;
+    });
+  }
+  
 
   handleMultipleSelectFilter(value: string, sectionId: string) {
     const queryParams = { ...this.activatedRoute.snapshot.queryParams };
